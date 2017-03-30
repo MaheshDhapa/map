@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <style type="text/css">
+            body, html
+            {
+                background-color:red; 
+                font-family:sans-serif; 
+                color:#330033; 
+                text-align:center;}
+            [draggable] 
+            {
+                user-select: none;
+            }
+            ul 
+            {
+                margin:auto;
+                width:20%;
+                text-align:center;
+            }
+            li 
+            {
+                list-style-type:none;
+                padding:5px;
+                margin:2px;
+                background-color:cyan;
+                border:2px double black;
+            }
+
+        </style>
+        <script type="text/javascript">
+
+            function dragStarted(evt)
+            {
+    
+   
+                //start drag LI Element   
+                source=evt.target;
+                //set data
+                evt.dataTransfer.setData("text/plain", evt.target.innerHTML);
+                //specify allowed transfer
+                //evt.dataTransfer.effectAllowed = "move";
+   
+   
+                 for(i=0;i<4;i++)
+                     {
+                               evt.dataTransfer.effectAllowed = "move";
+                         
+                     }
+   
+    
+            }
+            function draggingOver(evt)
+            {
+    
+                //drag over
+                evt.preventDefault();
+  
+                //specify operation
+                evt.dataTransfer.dropEffect = "move";
+    
+      
+            }
+            function dropped(evt) 
+            {
+  
+                //drop
+                evt.preventDefault();
+                evt.stopPropagation();
+                //update text in dragged item   
+    
+                //droptag data
+                source.innerHTML = evt.target.innerHTML;
+    
+   
+                //update text in drop target
+                // Select tag Data
+                evt.target.innerHTML = evt.dataTransfer.getData("text/plain");
+    
+   
+            }
+
+        </script>
+    </head>
+    <body>
+        <ul>
+            <li draggable="true" ondragstart="dragStarted(event)" ondragover="draggingOver(event)" ondrop="dropped(event)">1</li>
+            <li draggable="true" ondragstart="dragStarted(event)" ondragover="draggingOver(event)" ondrop="dropped(event)">2</li>
+            <li draggable="true" ondragstart="dragStarted(event)" ondragover="draggingOver(event)" ondrop="dropped(event)">3</li>
+            <li draggable="true" ondragstart="dragStarted(event)" ondragover="draggingOver(event)" ondrop="dropped(event)">4</li>
+        </ul>
+    </body>
+</html>
